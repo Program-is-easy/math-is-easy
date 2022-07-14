@@ -1,11 +1,12 @@
 import tkinter as tk
 from test import *
 from SysAriTrain import *
+from AriTrain import *
 # from
 # import
 
-bg_main      = "#555"
-fg_main      = "#ccc"
+bg_main      = "#0a192b"
+fg_main      = "#d9fdd0"
 relief_main  = tk.FLAT
 font_main    = ('Roboto', 15, 'bold')
 font_ex      = ('Arial', 15)
@@ -29,72 +30,55 @@ class SysAriTest():
     self.frm_guides['bg'] = bg_main
     self.frm_guides.grid(column=0, row=0)
 
-    self.texts_ex1 = [ex_1[0], ex_1[1], ex_1[2], ]
+    self.texts_ex1 = [ex_1[0], ex_1[1], ex_1[2], '...']
     for idx, text in enumerate(self.texts_ex1):
       self.lbl = self.create_lbl(text)
-
-      self.lbl.grid(column=0, row=idx, padx=0, pady=0, sticky="w")
-
-    # row 0-2
-    row = 0
+      if text == '...':
+        self.lbl_verify = self.lbl
+        self.lbl['width'] = 10
+        self.lbl_verify.grid(column=1, row=2)
+      else:
+        
+        self.lbl.grid(column=0, row=idx, padx=0, pady=0, sticky="w")
     
     self.ent_item   = tk.Entry(self.frm_example, relief=tk.SUNKEN, width=15)
-    self.lbl_verify = tk.Label(self.frm_example, width=15)
-
-    
     self.ent_item.insert(0, "0")
-    self.lbl_verify['text'] = '...'
+    self.ent_item.configure(relief=relief_main, bg=bg_main, fg=fg_main, font=font_main)
+    self.ent_item.grid  (column=1, row=1, padx=0, pady=0, sticky="w")
 
-    self.lbls = [
-      self.ent_item,
-      self.lbl_verify
-    ]
-
-    for item in self.lbls:
-      item.configure(relief=relief_main, bg=bg_main, fg=fg_main, font=font_main)
-
-    row = 0
- 
-    row = 1
-    self.ent_item.grid  (column=1, row=row, padx=0, pady=0, sticky="w")
- 
-    row = 2
-    self.lbl_verify.grid(column=1, row=row)
- 
-    row = 3
-    
- 
-    row = 4
     self.btn_submit = tk.Button(self.frm_example,
                             command=self.submit,
                             text='Проверить',
                             relief=tk.FLAT,
                             fg=fg_main,
                             bg=bg_main,
-                            font=('Roboto', 15, 'bold'),
+                            font=font_main,
                             width=10,
                             height=1,
                             highlightthickness=0)
-    self.btn_submit.grid (column=1, row=row, padx=0, pady=0, sticky="ewsn",)
+    self.btn_submit.grid (column=1, row=4, padx=0, pady=0, sticky="ewsn",)
  
   def submit(self):
     
     ent = [self.ent_item.get(),]
     rez1 = [str(input[0]),]
-    rez2 = [rez1[0].replace('.', ','),]# . or , -- replace
+    rez2 = [rez1[0].replace('.', ','),]      # . or , -- replace
     for idx in range(len(rez1)):
       if ent[idx] == rez1[idx] or ent[idx] == rez2[idx]:
-        SysAriTrain(self.slave)
-        self.lbl_verify = self.create_lbl('  верно  ', 'green')   # Add the rezult
+        #SysAriTrain(self.slave)              # start Application Sytem Arifmetically
+        self.lbl_verify['text'] = '  верно  '# Add the rezult
+        self.lbl_verify['fg'] = '#62be5c'
       else:
-        self.lbl_verify = self.create_lbl('неверно', 'red')
+        #AriTrain(self.slave)                 # start Application Arifmetically
+        self.lbl_verify['text'] = 'неверно'  # Add the rezult
+        self.lbl_verify['fg'] = '#c63b34'
       self.lbl_verify.grid(column=1, row=2, padx=10, pady=0, sticky="w")
 
-  def create_lbl(self, text, fg=fg_main):
-    return tk.Label(self.frm_example, text=text, relief=tk.FLAT,
-                    fg=fg, bg=bg_main, font=('Roboto', 15, 'bold'),
+  def create_lbl(self, text, fg=fg_main, font=font_main):
+    return tk.Label(self.frm_example, text=text, relief=relief_main,
+                    fg=fg, bg=bg_main, font=font,
                     )
 
   def create_ent(self):
-    return tk.Entry(self.frm_example, relief=tk.FLAT, width=5,
+    return tk.Entry(self.frm_example, relief=tk.SUNKEN, width=5,
                     fg=fg_main, bg=bg_main, font=('Roboto', 15, 'bold'))

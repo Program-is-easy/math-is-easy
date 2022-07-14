@@ -1,2 +1,2 @@
-class SysAriTrain(object):
+class SysAriTrain():
   pass
