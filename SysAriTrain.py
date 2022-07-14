@@ -1,0 +1,2 @@
+class SysAriTrain(object):
+  pass
