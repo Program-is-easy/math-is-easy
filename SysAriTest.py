@@ -46,7 +46,7 @@ class SysAriTest():
     ]
     for idx in range(len(ent)):
       if (ent[idx].ent_item.get() == str(ent[idx].answer) or
-      ent[idx].ent_item.get() == str(ent[idx].answer.replace('.', ','))):
+      ent[idx].ent_item.get().replace('.', ',') == str(ent[idx].answer)):
         SysAriTrain(self.slave)              # start Application Sytem Arifmetically
         self.create_ex_1.lbl_verify['text'] = '  верно  '# Add the rezult
         self.create_ex_1.lbl_verify['fg'] = '#62be5c'
