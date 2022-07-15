@@ -9,8 +9,6 @@ class App():
     self.master.geometry('+50+50')
     self.master.wm_attributes("-topmost", 1)
 
-    self.lbl = tk.Label(self.master, font=15)
-
     # button test
     self.btn_test = tk.Button(self.master, text="Test", font=('Roboto', 30, 'bold'), relief=tk.FLAT, bg=bg_main, fg='#F8DE5C')
     self.btn_test.bind('<Button-1>', self.open_SysAriTest)
