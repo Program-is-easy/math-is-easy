@@ -5,8 +5,9 @@ class App():
   def __init__(self, master):
     self.master = master
     self.root = master
-    self.master.title('add')
-    self.master.geometry('+50+50')
+
+    self.master.title('my first application')
+    self.master.geometry('+500+500')
     self.master.wm_attributes("-topmost", 1)
 
     # button test
